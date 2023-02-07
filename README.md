@@ -25,5 +25,5 @@ npm run scss
 
 ## Visit the Page
 
-- [Frontend](http://localhost:3000/)
-- [Backend](http://localhost:3000/admin/)
+- [Frontend](http://localhost:7000/)
+- [Backend](http://localhost:7000/admin/)
