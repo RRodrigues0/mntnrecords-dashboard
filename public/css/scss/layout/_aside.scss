@@ -1,0 +1,373 @@
+aside {
+    @extend .globalPadding;
+    //@extend .globalHeight;
+
+    position: fixed;
+    transform: translateX(-100%);
+    transition: $transition;
+    z-index: 2;
+    background: $light;
+
+    @include breakpoint(huge) {
+        position: relative;
+        transform: none;
+        background: none;
+    }
+
+    //body.login & {
+    //    @include breakpoint(huge, max) {
+    //        display: none;
+    //    }
+    //}
+
+    &.left {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        @include breakpoint(huge, max) {
+            z-index: 3;
+            transform: none;
+            padding: 0.86rem 0 .85rem;
+            height: auto;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            box-shadow: 7px 30px 77px 0px rgba(147,148,166,0.3);
+        }
+
+        body.login & {
+            position: relative;
+            box-shadow: none;
+        }
+
+        .logo {
+            @include breakpoint(huge, max) {
+                display: none;
+            }
+
+            @include breakpoint(huge) {
+                margin-bottom: 2rem;
+            }
+
+            body.login & {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            a {
+                display: inline-flex;
+
+                img {
+                    background: $primary;
+                    width: rem(55px);
+                    height: rem(55px);
+                    padding: rem(12px);
+                    border-radius: rem(18px);
+                    object-position: center rem(-0.2px);
+                }
+            }
+        }
+
+        .navigation {
+            nav {
+                ul {
+                    display: flex;
+                    justify-content: space-evenly;
+                    gap: rem(30px);
+                    margin-bottom: 0;
+
+                    @include breakpoint(huge) {
+                        flex-direction: column;
+
+                        @media(max-height: 1050px) {
+                            gap: rem(20px);
+                        }
+                    }
+
+                    li {
+                        a {
+                            color: $icon;
+
+                            @include breakpoint(huge) {
+                                padding-left: rem(40px);
+                            }
+
+                            @include breakpoint(huge, max) {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                            }
+
+                            i {
+                                font-size: rem(18px);
+
+                                @include breakpoint(huge) {
+                                    text-indent: rem(-40px);
+                                }
+                            }
+
+                            &:active, &:hover, &.active {
+                                color: $primary;
+
+                                i {
+                                    color: $primary;
+                                }
+                            }
+
+                            span {
+                                @include breakpoint(huge, max) {
+                                    font-size: rem(9px);
+                                    line-height: 1;
+                                    margin-top: rem(9px);
+                                }
+                                //display: none;
+                                //
+                                //@include breakpoint(huge) {
+                                //    display: inline;
+                                //}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .report {
+            padding: $baseGap;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            @include breakpoint(huge, max) {
+                display: none;
+            }
+
+            @include breakpoint(huge) {
+                @media(max-height: 989px) {
+                    display: none;
+                }
+            }
+
+
+            &:before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 68%;
+                width: 100%;
+                background: $background;
+                border-radius: rem(25px);
+                z-index: 0;
+            }
+
+            * {
+                z-index: 1;
+                position: relative;
+            }
+
+            img {
+                @extend .marginBottom;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% + 75px);
+                pointer-events: none;
+            }
+
+            .btn {
+                width: 100%
+            }
+        }
+    }
+
+    &.right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.75rem;
+
+        @include breakpoint(huge, max) {
+            height: calc(100% - 67px);
+            width: 100%;
+            padding: 0 $baseGap $baseGap $baseGap;
+            background: $light;
+            top: 0;
+            overflow-y: auto;
+        }
+
+        &.active {
+            transform: translateX(0);
+        }
+
+        .iconBar {
+            margin-bottom: calc(1.75rem - $baseGap);
+            padding-top: 1rem;
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-end;
+
+            @include breakpoint(huge) {
+                display: none;
+            }
+
+            ul:first-child {
+                @include breakpoint(huge) {
+                    @media (min-height: 1080px) {
+                        display: none;
+                    }
+                }
+            }
+
+            ul {
+                display: flex;
+                align-items: center;
+                gap: 1.2rem;
+                margin: 0;
+
+                @include breakpoint(large) {
+                    gap: 1.75rem;
+                }
+
+                li {
+                    margin: 0;
+                    font-size: 1.15rem;
+
+                    @include breakpoint(large) {
+                        font-size: 1.3rem;
+                    }
+
+                    button {
+                        &:active, &:hover, &.active {
+                            i {
+                                color: $primary;
+                            }
+                        }
+
+                        i {
+                            transition: $transition;
+                        }
+                    }
+                }
+            }
+        }
+        .user {
+            a {
+                display: inline-flex;
+                margin-bottom: 1.25rem;
+                overflow: hidden;
+                border-radius: 50%;
+
+                &:active, &:hover, &.active {
+                    img {
+                        transform: scale(1.15);
+                    }
+                }
+
+                img {
+                    transition: $transition;
+                    width: rem(85px);
+                    height: rem(85px);
+
+                }
+            }
+
+            .headline {
+                margin-bottom: 0;
+            }
+        }
+
+        #total {
+            border-radius: rem(25px);
+            background: $background;
+            padding: $baseGap;
+
+            @include breakpoint(huge) {
+                max-width: 16.5rem;
+            }
+
+            .headline {
+                margin-bottom: 0;
+                margin-top: .5rem;
+            }
+
+            .apexcharts {
+                pointer-events: none;
+
+                @include breakpoint(huge) {
+                    @media(max-height: 999px) {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .recentActivities {
+            @include breakpoint(huge) {
+                @media(max-height: 1149px) {
+                    .day:not(:nth-child(1)):not(:nth-child(2)), .hr {
+                        display: none;
+                    }
+                }
+            }
+
+            .day {
+                display: flex;
+                flex-direction: column;
+                gap: rem(20px) 0;
+
+                & > .small {
+                    margin: 0;
+                    line-height: 1;
+                }
+
+                .in, .out {
+                    display: flex;
+                    justify-content: space-between;
+
+                    i {
+                        width: rem(50px);
+                        height: rem(50px);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 15px;
+                        background: $background;
+                        margin-right: rem(15px);
+                    }
+
+                    .description {
+                        display: flex;
+                        align-items: center;
+
+                        .headline {
+                            margin-bottom: 0;
+                            line-height: 1.3;
+                            max-width: 8rem;
+                        }
+                    }
+                }
+
+                .out {
+                    i {
+                        background: #fdecf6;
+                        color: #ff3350;
+                    }
+                }
+
+                .in {
+                    i {
+                        background: #e7fdf1;
+                        color: #40dd6a;
+                    }
+                }
+            }
+        }
+
+    }
+}

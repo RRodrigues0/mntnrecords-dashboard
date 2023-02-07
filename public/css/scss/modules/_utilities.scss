@@ -1,0 +1,56 @@
+@use "sass:math";
+
+// Font Mixin
+@function rem($baseFontSize) {
+    $remSize: calc($baseFontSize / 16px);
+    @return $remSize * 1rem;
+}
+
+@mixin font($baseFontSize, $baseFontWeight, $baseLineHeight, $mainFont) {
+    font-size: rem($baseFontSize);
+    line-height: $baseLineHeight;
+    font-weight: $baseFontWeight;
+    font-family: $mainFont;
+}
+
+// Breakpoints Mixin
+@mixin breakpoint($point, $direction: min) {
+    @if map-has-key($gridMap, $point) {
+        @media ( #{$direction+'-width'}:
+                if( $direction == min, map-get($gridMap, $point), calc(map-get($gridMap, $point) - 1px))
+        ) {
+            @content;
+        }
+    }
+}
+
+// Clamp mixin related to min and max grid size
+@mixin clamp-calc($min-vw, $max-vw, $min-value, $max-value, $property) {
+    $factor: calc(1 / ($max-vw - $min-vw)) * ($max-value - $min-value);
+
+    $calc-value: unquote('#{ $min-value - ($min-vw * $factor) } + #{ 100vw * $factor }');
+
+    #{$property}: $min-value;
+
+    @media screen and (min-width: #{ $min-vw }) {
+        #{$property}: calc(#{$calc-value});
+    }
+
+    @media screen and (min-width: #{ $max-vw }) {
+        #{$property}: $max-value;
+    }
+}
+
+// Appends the relative path to the images folder to the given URL
+@function image-url($url) {
+    @return url("#{$imagePath}#{$url}");
+}
+
+%lazyloading {
+    background: image-url('/layout/loading.svg') no-repeat center center;
+    background-size: rem(40px);
+}
+
+.marginBottom {
+    margin-bottom: $marginBottom;
+}

@@ -1,0 +1,168 @@
+doctype html
+html.light-style(lang="en")
+    head
+        include includes/_head
+    body(class="dashboard" data-month= total_monthAt ? total_monthAt : "7")
+        div(class="grid container")
+            div(class="row")
+                div(class="col-12")
+                    div(class="page")
+                        aside(class="left")
+                            div(class="logo")
+                                a(href="/")
+                                    img(src="/public/images/branding.svg")
+                            div(class="navigation")
+                                nav
+                                    ul
+                                        li(class="overview")
+                                            a(class="active" href="/")
+                                                i(class="fa fa-house")
+                                                span Overview
+                                        li(class="profile")
+                                            a(href="/profile")
+                                                i(class="fa fa-user")
+                                                span Profile
+                                        //li(class="statistics")
+                                        //    a(href="/statistics")
+                                        //        i(class="fa fa-chart-simple")
+                                        //        span Statistics
+                                        li(class="documents")
+                                            a(href="/documents")
+                                                i(class="fa fa-file-invoice")
+                                                span Documents
+                                        li(class="payout")
+                                            a(href="/payout")
+                                                i(class="fa fa-money-check")
+                                                span Payout
+                            div(class="report")
+                                img(src="/public/images/report.png")
+                                p(class="h4 headline") PDF Report
+                                    span(class="small") Detailed monthly report
+                                a(class="btn" href="/documents#newest") Download
+                        main
+                            div(class="padding")
+                                div(class="iconBar")
+                                    ul
+                                        li
+                                            button(class="wallet")
+                                                i(class="fa fa-wallet")
+                                    ul
+                                        li
+                                            button(class="currency")
+                                                i(class="fa fa-euro-sign")
+                                        li
+                                            button(class="notifications")
+                                                i(class="fa fa-bell")
+                                        li
+                                            a(class="logout" href="/logout")
+                                                i(class="fa fa-right-from-bracket")
+
+                                div(class="overview")
+                                    h1 Overview
+                                    div(class="grid")
+                                        div(class="card")
+                                            button(class="wallet")
+                                                div(class="tilt")
+                                                    img(src="/public/images/paypal.svg")
+                                                    div(class="flex")
+                                                        div(class="left")
+                                                            p(class="small uppercase") Balance
+                                                            span €
+                                                            if total_remaining
+                                                                span= total_remaining
+                                                            else
+                                                                span 0.00
+                                                        div(class="right")
+                                                            p(class="small uppercase") Holder
+                                                            span= first_name
+                                        div(id="earnings")
+                                            div(class="flex")
+                                                span(class="headline") Earnings
+                                                div(class="utilities")
+                                                    ul
+                                                        li(class="eur")
+                                                            button EUR
+                                                        li(class="usd")
+                                                            button USD
+                                                        li(class="cny")
+                                                            button CNY
+                                            div(class="apexcharts" data-js= total_total2_history)
+                                        div(id="lastReaches")
+                                            div(class="flex")
+                                                span(class="headline") Last reaches
+                                            div(class="apexcharts" data-js-streams= total_streams_history data-js-downloads= total_downloads_history)
+                                        div(id="efficiency")
+                                            div(class="flex")
+                                                span(class="headline") Efficiency
+                                            div(class="apexcharts" data-js= total_streams_history)
+                        aside(class="right")
+                            div(class="iconBar")
+                                ul
+                                    li
+                                        button(class="close")
+                                            i(class="fa fa-xmark")
+                            div(class="user")
+                                a(href="/profile")
+                                    img(src= avatar)
+                                p(class="h3 headline")
+                                    span= first_name
+                                    span &nbsp;
+                                    span= last_name
+                                    span(class="small") Artist
+                            div(id="total")
+                                p(class="h2 headline")
+                                    span(class="small top") Balance
+                                    span €
+                                    if total_remaining
+                                        span= total_remaining
+                                    else
+                                        span 0.00
+                                div(class="apexcharts" data-js= total_remaining_history)
+                            if month_now_in_name
+                                div(class="recentActivities")
+                                    p(class="h5 headline") Recent activities
+                                    div(class="day")
+                                        p(class="small uppercase") This month
+                                        div(class="in")
+                                            div(class="description")
+                                                i(class="fa fa-arrow-trend-up")
+                                                p(class="headline")
+                                                    span= month_now_in_name
+                                                    span(class="small") Earned
+                                            span(class="money")= month_now_in_money
+                                        if month_now_out_name
+                                            div(class="out")
+                                                div(class="description")
+                                                    i(class="fa fa-arrow-trend-down")
+                                                    p(class="headline")
+                                                        span= month_now_out_name
+                                                        span(class="small") Payout
+                                                span(class="money")= month_now_out_money
+                                    if month_before_in_name
+                                        span(class="hr")
+                                        div(class="day")
+                                            p(class="small uppercase") Last month
+                                            div(class="in")
+                                                div(class="description")
+                                                    i(class="fa fa-arrow-trend-up")
+                                                    p(class="headline")
+                                                        span= month_before_in_name
+                                                        span(class="small") Earned
+                                                span(class="money")= month_before_in_money
+                                            if !month_now_out_name && month_before_out_name
+                                                div(class="out")
+                                                    div(class="description")
+                                                        i(class="fa fa-arrow-trend-down")
+                                                        p(class="headline")
+                                                            span= month_before_out_name
+                                                            span(class="small") Payout
+                                                    span(class="money")= month_before_out_money
+
+        include includes/_scripts
+        script(src='/public/js/apexcharts.js')
+        script(src='/public/js/apexcharts/earnings.js')
+        script(src='/public/js/apexcharts/lastReaches.js')
+        script(src='/public/js/apexcharts/efficiency.js')
+        script(src='/public/js/apexcharts/total.js')
+        script(async='', src='https://www.googletagmanager.com/gtag/js?id=G-9P4DS23DR6')
+        script(src='/public/js/analytics.js')

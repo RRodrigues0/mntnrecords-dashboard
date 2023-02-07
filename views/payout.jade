@@ -1,0 +1,111 @@
+doctype html
+html.light-style(lang="en")
+    head
+        include includes/_head
+    body(class="payout")
+        div(class="grid container")
+            div(class="row")
+                div(class="col-12")
+                    div(class="page")
+                        aside(class="left")
+                            div(class="logo")
+                                a(href="/")
+                                    img(src="/public/images/branding.svg")
+                            div(class="navigation")
+                                nav
+                                    ul
+                                        li(class="overview")
+                                            a(href="/")
+                                                i(class="fa fa-house")
+                                                span Overview
+                                        li(class="profile")
+                                            a(href="/profile")
+                                                i(class="fa fa-user")
+                                                span Profile
+                                        li(class="documents")
+                                            a(href="/documents")
+                                                i(class="fa fa-file-invoice")
+                                                span Documents
+                                        li(class="payout")
+                                            a(class="active" href="/payout")
+                                                i(class="fa fa-money-check")
+                                                span Payout
+                            div(class="report")
+                                img(src="/public/images/report.png")
+                                p(class="h4 headline") PDF Report
+                                    span(class="small") Detailed monthly report
+                                a(class="btn" href="/documents#newest") Download
+                        main
+                            div(class="padding")
+                                div(class="iconBar")
+                                    ul
+                                    ul
+                                        li
+                                            button(class="currency")
+                                                i(class="fa fa-euro-sign")
+                                        li
+                                            button(class="notifications")
+                                                i(class="fa fa-bell")
+                                        li
+                                            a(class="logout" href="/logout")
+                                                i(class="fa fa-right-from-bracket")
+
+                                div(class="content")
+                                    h1 Payout
+                                    div(class="row")
+                                        div(class="col-12 col-xl-8")
+                                            form(id="dataForm" method='POST' action='/payout')
+                                                div(class="box")
+                                                    p(class="headline") Your address informations
+                                                    div(class="row")
+                                                        div(class="col-12")
+                                                            label(for='billingAddress') Paypal email
+                                                            input#billingAddress(type='text' name='billingAddress' value= userdata.paypal.email)
+                                                        div(class="col-12 col-lg-6")
+                                                            label(for='paypalFirstName') First name
+                                                            input#paypalFirstName(type='text' name='paypalFirstName' value= userdata.paypal['first_name'])
+                                                        div(class="col-12 col-lg-6")
+                                                            label(for='paypalLastName') Last name
+                                                            input#paypalLastName(type='text' name='paypalLastName' value= userdata.paypal['last_name'])
+                                                        div(class="col-12 col-lg-6")
+                                                            label(for='paypalAddress') Street and house number
+                                                            input#paypalAddress(type='text' name='paypalAddress' value= userdata.paypal['street_and_house_number'])
+                                                        div(class="col-12 col-lg-6")
+                                                            label(for='paypalCity') City
+                                                            input#paypalCity(type='text' name='paypalCity' value= userdata.paypal['city'])
+                                                        div(class="col-12 col-lg-6")
+                                                            label(for='paypalZipCode') Zip code
+                                                            input#paypalZipCode(type='text' name='paypalZipCode' value= userdata.paypal['zip'])
+                                                        div(class="col-12 col-lg-6")
+                                                            label(for='paypalCountry') Country
+                                                            input#paypalCountry(type='text' name='paypalCountry' value= userdata.paypal['country'])
+                                                        div(class="col-12")
+                                                            div(class="flex")
+                                                                input(type="submit" class="btn" value="Save changes")
+                                                                input(type='button' class="btn secondary" value='Cancel' onclick='document.querySelector("#dataForm").reset();')
+                                                            div(class="output")
+                                                                if error_address
+                                                                    div(class="border-error")= error_address
+                                                                if success_address
+                                                                    div(class="border-success")= success_address
+                                        div(class="col-12 col-xl-4")
+                                            form(method='POST' id="#payoutForm" action='/payout')
+                                                div(class="box")
+                                                    span(class="small") Please fill out the left fields completely to request your payout. If you are under 18, please provide your parents' payout details. Feel free to contact us via Discord or email if you have any questions.
+                                                div(class="box")
+                                                    p(class="headline") Get your earnings
+                                                    p(class="h2 headline")
+                                                        span(class="small top") Balance
+                                                        span €
+                                                        span= total_remaining
+                                                    label(for='moneySum') Payout amount
+                                                    input(name="moneySum" required="true" type="number" min="10" step='0.01' value="0.00" id="moneySum")
+                                                    input(type="submit" class="btn" value="Request now")
+                                                    div(class="output")
+                                                        if error
+                                                            div(class="border-error")= error
+                                                        if success
+                                                            div(class="border-success")= success
+        include includes/_scripts
+        script(async='', src='https://www.googletagmanager.com/gtag/js?id=G-9P4DS23DR6')
+        script(src='/public/js/analytics.js')

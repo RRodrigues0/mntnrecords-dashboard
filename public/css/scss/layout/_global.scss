@@ -1,0 +1,501 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    &,
+    &:before,
+    &:after {
+        box-sizing: inherit;
+    }
+}
+
+html {
+    box-sizing: border-box;
+    color: $dark;
+    font-family: $mainFont;
+    font-size: calc(100% * ($baseFontSize / 16px));
+    line-height: rem($baseLineHeight);
+    scroll-behavior: smooth;
+    text-size-adjust: none;
+}
+
+body {
+    line-height: rem($baseLineHeight);
+    background: $background;
+
+    &.noscroll {
+        overflow: hidden;
+    }
+
+    @include breakpoint(huge) {
+        @media (max-height: 1079px) {
+            background: $primary;
+        }
+        @media (min-height: 1080px) {
+            background: $primary;
+        }
+    }
+
+    &:before {
+        font-size: 10px;
+        line-height: 1;
+
+        @media (min-height: 1000px) {
+            content: "V.2.0.1 Beta";
+            position: fixed;
+            bottom: .5rem;
+            left: .5rem;
+            color: $medium;
+        }
+
+        @media (min-height: 1200px) {
+            font-size: 13px;
+        }
+    }
+}
+
+.grid {
+    & > .row {
+        & > .col-12 {
+            @include breakpoint(huge, max) {
+                padding: 0;
+            }
+            @include breakpoint(huge) {
+                height: 100vh;
+                height: 100svh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .page {
+                background: $light;
+
+                @include breakpoint(huge) {
+                    overflow: hidden;
+                    border-radius: rem(50px);
+                    display: grid;
+                    grid-template-columns: rem(330px) 9.5fr;
+                    width: 100%;
+
+                    body.dashboard & {
+                        grid-template-columns: rem(330px) 6.75fr 2.75fr;
+                    }
+
+                    @media(max-height: 989px) {
+                        grid-template-columns: rem(260px) 9.5fr;
+
+                        body.dashboard & {
+                            grid-template-columns: rem(260px) 6.75fr 2.75fr;
+                        }
+                    }
+                }
+
+                body.login & {
+                    @include breakpoint(huge, max) {
+                        height: 100vh;
+                        height: 100svh;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-evenly;
+                        overflow: hidden;
+                    }
+
+
+                    @include breakpoint(huge) {
+                        padding: 0 rem(calc($baseGap * 2));
+                        display: block;
+                        max-width: rem(500px);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+iframe,
+[data-iframe] {
+    border: none;
+    width: 100%;
+}
+
+address {
+    font-style:normal;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    @extend .marginBottom;
+    display: block;
+    text-rendering: optimizeLegibility;
+    hyphens: auto;
+    font-weight: 700;
+    line-height: 1.3;
+
+    span.small {
+        hyphens: none;
+    }
+}
+
+h1, .h1 {
+    @include clamp-calc($gridMinWidth, $gridMaxWidth, $h1SizeMobile, $h1SizeDesktop, font-size);
+}
+
+h2, .h2 {
+    @include clamp-calc($gridMinWidth, $gridMaxWidth, $h2SizeMobile, $h2SizeDesktop, font-size);
+}
+
+h3, .h3 {
+    @include clamp-calc($gridMinWidth, $gridMaxWidth, $h3SizeMobile, $h3SizeDesktop, font-size);
+}
+
+h4, .h4 {
+    @include clamp-calc($gridMinWidth, $gridMaxWidth, $h4SizeMobile, $h4SizeDesktop, font-size);
+}
+
+h5, .h5 {
+    @include clamp-calc($gridMinWidth, $gridMaxWidth, $h5SizeMobile, $h5SizeDesktop, font-size);
+}
+
+h6, .h6 {
+    @include clamp-calc($gridMinWidth, $gridMaxWidth, $h6SizeMobile, $h6SizeDesktop, font-size);
+}
+
+p {
+    @extend .marginBottom;
+    margin-top: 0;
+
+    &.headline {
+        display: block;
+        font-weight: 600;
+
+        //& > span:not(.small) {
+        //    display: block;
+        //}
+    }
+}
+
+.small {
+    font-size: calc(#{$baseFontSize} - 3px);
+    color: $medium;
+    font-weight: 400;
+    display: block;
+    margin-top: rem(6px);
+    line-height: 1.6;
+
+    &.top {
+        margin-top: 0;
+        margin-bottom: rem(7px);
+    }
+}
+
+a {
+    color: $primary;
+    word-wrap: break-word;
+    transition: $transition;
+    text-decoration: none;
+    font-weight: 500;
+    align-items: baseline;
+
+    &:hover, &:active, &:focus {
+        color: $secondary;
+    }
+
+    img {
+        border: none;
+    }
+
+    &[href^="tel"] {
+        color: inherit;
+    }
+}
+
+.btn {
+    background: $primary;
+    border: none;
+    color: $light;
+    cursor: pointer;
+    display: inline-block;
+    padding: .74rem $baseGap;
+    text-align: center;
+    text-decoration: none;
+    transition: $transition;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: inherit;
+    border-radius: 27px;
+
+    @include breakpoint(large) {
+        padding: .9rem 2.0rem;
+    }
+
+    &.secondary {
+        background: #9097a3;
+
+    }
+
+    &.border {
+        background: transparent;
+        border: 1px solid $icon;
+        color: $icon;
+        padding: .65rem 2.0rem;
+        font-size: rem(15px);
+    }
+
+    i {
+        margin-right: rem(8px);
+    }
+
+    &:hover, &:focus, &:active {
+        background: $secondary;
+        color: $light;
+
+        i {
+            color: $light;
+        }
+    }
+}
+
+a:not(.btn):focus,
+[tabindex]:focus {
+    outline: $outline;
+    outline-offset: rem(5px);
+}
+
+hr,
+.hr {
+    display: flex;
+    background: #eaeaf4;
+    border: none;
+    clear: both;
+    height: rem(1px);
+    margin: rem(30px) 0;
+    flex-basis: 100%;
+}
+
+strong {
+    font-weight: 500;
+}
+
+ul {
+    @extend .marginBottom;
+    list-style: none;
+
+    &.styledList {
+        li {
+            padding-left: rem(15px);
+            margin-bottom: rem(7px);
+
+            &:before {
+                @extend .fas;
+                @extend .fa-angle-right;
+                text-indent: rem(-15px);
+            }
+        }
+
+        ul {
+            margin-left: 1rem;
+            margin-bottom: 0;
+        }
+    }
+}
+
+dl {
+    &.styledList {
+        dt,
+        dd {
+            display: block;
+            background: rgba($medium, 0.8);
+            padding: rem(15px);
+        }
+
+        dt {
+            padding-bottom: 0;
+            font-weight: bold;
+        }
+
+        dd {
+            padding-top: 0;
+
+            + dt {
+                margin-top: rem(10px);
+            }
+
+            + dd {
+                margin-top: rem(-15px);
+            }
+        }
+    }
+}
+
+ol {
+    &.styledList, body main & {
+        counter-reset: item;
+
+        li {
+            counter-increment: item;
+            margin-bottom: rem(7px);
+
+            &:before {
+                content: counters(item, ".") ". ";
+            }
+        }
+
+        ol {
+            margin-bottom: 0;
+
+            li {
+                margin-bottom: rem(7px);
+
+                &:before {
+                    content: counters(item, ".") " ";
+                    margin-right: rem(5px);
+                }
+            }
+        }
+    }
+}
+
+img {
+    display: inline-block;
+    height: auto;
+    transition: $transition;
+
+    &[data-src] {
+        @extend %lazyloading;
+    }
+
+    &.img-fluid {
+        display: block;
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+main {
+    table {
+        display: table;
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 100%;
+        text-align: left;
+        font-size: rem($baseFontSize);
+
+        @include breakpoint(small, max) {
+            overflow-x: auto;
+            display: block;
+        }
+
+        caption {
+            text-align: left;
+            padding: rem($baseGap) rem($baseGap) rem(25px);
+            display: table-caption;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        thead {
+            border-collapse: collapse;
+            display: table-header-group;
+        }
+
+        tbody {
+            width: 100%;
+            overflow-x: scroll;
+            display: table-row-group;
+
+            tr {
+                padding: rem($baseGap) 0;
+
+                &:not(:last-child) {
+                    border-bottom: rem(1px) solid $medium;
+                }
+            }
+        }
+
+        tr {
+            display: table-row;
+        }
+
+        th,
+        td {
+            padding: rem($baseGap);
+            display: table-cell;
+            vertical-align: top;
+        }
+
+        @include breakpoint(small, max) {
+            td {
+                min-width: 50vw;
+            }
+        }
+    }
+}
+
+button {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: inherit;
+    line-height: 100%;
+    text-decoration: none;
+    font-family: $mainFont;
+    transition: $transition;
+    text-align: left;
+    color: inherit;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+i {
+    color: $icon;
+    transition: $transition;
+}
+
+.globalPadding {
+    padding: 0 rem($baseGap);
+
+    @include breakpoint(huge) {
+        padding: rem(calc(40px + $baseGap)) rem(calc($baseGap * 2));
+    }
+}
+
+.globalHeight {
+    body:not(.login) & {
+        @include breakpoint(huge) {
+            @media (min-height: 1080px) {
+                min-height: rem(800px);
+                height: 90vh;
+                height: 90svh;
+                max-height: rem(935px);
+                //height: 100%;
+            }
+
+            @media (max-width: 1949px) {
+                height: calc(100vh - calc(#{$baseGap} * 4));
+                height:  calc(100svh - calc(#{$baseGap} * 4));
+                max-height: rem(860px);
+            }
+        }
+    }
+}
+
+.uppercase {
+    text-transform: uppercase;
+    letter-spacing: rem(.25px);
+}
+
+button.currency, button.notifications, .report .btn, .navigation .documents, .usd, .cny {
+    &, * {
+        cursor: not-allowed !important;
+
+        @include breakpoint(huge, max) {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    }
+}

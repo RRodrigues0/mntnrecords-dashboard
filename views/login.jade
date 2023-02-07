@@ -1,0 +1,37 @@
+doctype html
+html.light-style(lang="en")
+    head
+        include includes/_head
+    body(class="login")
+        div(class="grid container")
+            div(class="row")
+                div(class="col-12")
+                    div(class="page")
+                        aside(class="left")
+                            div(class="logo")
+                                a(href="/login")
+                                    img(src="/public/images/branding.svg")
+                        main
+                            div(class="padding")
+                                div(class="infoText")
+                                    h1(class="h2 headline")
+                                        span Welcome back
+                                        span(class="small") Please log into your account to access your dashboard
+                                div(class="overview")
+                                    form(id="loginAuthentication" action="/login" method="POST")
+                                        if(!error)
+                                            input(id="email" name="username" required="true" placeholder="Your email" type="email" autofocus="true")
+                                        else
+                                            div(class="error")
+                                                input(id="email" name="username" required="true" placeholder="Your email" type="email")
+                                        if(!error)
+                                            input(id="password" name="password" required="true" placeholder="Your password" type="password")
+                                        else
+                                            div(class="error")
+                                                input(id="password" name="password" required="true" placeholder="Your password" type="password")
+                                        input(id="remember" type="checkbox" name="remember")
+                                        label(for="remember") Remember Me
+                                        input(type="submit" value="Sign in")
+        include includes/_scripts
+
+

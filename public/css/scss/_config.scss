@@ -1,0 +1,58 @@
+$baseFontSize: 17px;
+$baseLineHeight: 30px;
+$baseFontWeight: 400;
+
+$h1SizeDesktop: 50px;
+$h1SizeMobile: 30px;
+
+$h2SizeDesktop: 33px;
+$h2SizeMobile: 25px;
+
+$h3SizeDesktop: 25px;
+$h3SizeMobile: 22px;
+
+$h4SizeDesktop: 22px;
+$h4SizeMobile: 20px;
+
+$h5SizeDesktop: 19px;
+$h5SizeMobile: 18px;
+
+$h6SizeDesktop: 18px;
+$h6SizeMobile: 16px;
+
+$mainFont: "Poppins", sans-serif;
+$displayFont: "Poppins", sans-serif;
+$iconFont: "Font Awesome 6 Free";
+
+$primary: #1D2533;
+$secondary: #506385;
+$light: #fff;
+$medium: #9394a6;
+$dark: #252443;
+$border: $medium;
+$background: #f7f8fd;
+$icon: #506385;
+
+$baseGap: 27px;
+$gridMaxWidth: 1620px;
+$gridMinWidth: 320px;
+
+$baseBorder: 1px solid $border;
+$outline: 1px dotted $border;
+$borderRadius: 50px;
+
+$gridMap: (
+  default: 0px,
+  small: 576px,
+  medium: 768px,
+  large: 992px,
+  giant: 1200px,
+  huge: 1400px,
+  cut: $gridMaxWidth,
+);
+
+$transition: 500ms cubic-bezier(0.6, 0, 0, 0.5);
+
+$marginBottom: 1.75rem;
+
+$imagePath: "/public/images/" !default;

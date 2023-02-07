@@ -1,0 +1,391 @@
+main {
+    //@extend .globalHeight;
+
+    @include breakpoint(huge) {
+        padding: rem($baseGap) rem($baseGap) rem($baseGap) 0;
+
+        body.dashboard &, body.login & {
+            padding: rem($baseGap) 0;
+        }
+    }
+
+    body.login & {
+        @include breakpoint(huge, max) {
+            position: relative;
+
+            &:before {
+                content: "";
+                position: absolute;
+                top: 100%;
+                height: 100%;
+                width: 100%;
+                left: 0;
+                background: $background;
+            }
+        }
+
+        @include breakpoint(huge) {
+            padding-top: 0;
+            padding-bottom: rem(calc($baseGap * 2));
+        }
+    }
+
+    & > .padding {
+        background: $background;
+
+        padding: 0 rem($baseGap) calc(rem($baseGap) + 67px) rem($baseGap);
+        @extend .globalHeight;
+
+        body.login & {
+            padding: rem($baseGap);
+
+            @media (min-height: 600px) {
+                padding: calc(rem($baseGap) * 2) rem($baseGap) rem($baseGap) rem($baseGap);
+            }
+
+            @media (min-height: 800px) {
+                padding: calc(rem($baseGap) * 4) rem($baseGap) rem($baseGap) rem($baseGap);
+            }
+
+            @media (min-height: 1000px) {
+                padding: calc(rem($baseGap) * 6) rem($baseGap) rem($baseGap) rem($baseGap);
+            }
+
+            @include breakpoint(huge) {
+                display: block;
+                height: auto;
+                padding: 4rem rem(calc($baseGap * 2));
+            }
+
+            & > * {
+                max-width: rem(400px);
+                margin: 0 auto;
+            }
+        }
+
+        @include breakpoint(huge) {
+            @media (max-height: 1079px) {
+                max-height: 100%;
+                overflow-y: auto;
+            }
+
+                border-radius: rem(50px);
+                padding: rem(40px) rem(60px);
+
+        }
+    }
+
+    .infoText {
+        body:not(.login) & {
+            margin-bottom: 2.5rem;
+        }
+    }
+
+    .iconBar {
+        @extend .marginBottom;
+        padding-top: 1rem;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+
+        @include breakpoint(huge) {
+            @media (min-height: 1080px) {
+                padding-top: 0;
+                justify-content: flex-end;
+            }
+        }
+
+        ul:first-child {
+            @include breakpoint(huge) {
+                @media (min-height: 1080px) {
+                    display: none;
+                }
+            }
+        }
+
+        ul {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin: 0;
+
+            @include breakpoint(large) {
+                gap: 1.75rem;
+            }
+
+            li {
+                margin: 0;
+                font-size: 1rem;
+
+                @include breakpoint(large) {
+                    font-size: 1.125rem;
+                }
+
+                button {
+                    &:active, &:hover, &.active {
+                        i {
+                            color: $primary;
+                        }
+                    }
+
+                    i {
+                        transition: $transition;
+                    }
+
+                    &.notifications {
+                        i {
+                            position: relative;
+
+                            &:after {
+                                content: "";
+                                border-radius: 50%;
+                                background: #ff3350;
+                                width: rem(8px);
+                                height: rem(8px);
+                                display: block;
+                                position: absolute;
+                                top: -2px;
+                                right: -2px;
+                                border: 2px solid $background;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .overview, .content {
+        .grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 100%;
+            grid-gap: rem($baseGap);
+
+            @include breakpoint(medium) {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            @include breakpoint(large) {
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            }
+
+            & > * {
+                background: $light;
+                border-radius: rem(25px);
+                z-index: 1;
+                position: relative;
+
+                .flex {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .headline {
+                        font-weight: 600
+                    }
+
+                    .utilities {
+                        @extend .small;
+                        margin: 0;
+                        color: $dark;
+
+                        ul {
+                            display: flex;
+                            gap: rem(7px);
+                            margin: 0;
+
+                            li:not(:first-child) {
+                                button {
+                                    color: $medium;
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            .card {
+                background: none;
+                position: relative;
+
+                @include breakpoint(large) {
+                    grid-column: 1 / 5;
+                }
+
+                button {
+                    width: 100%;
+
+                    @include breakpoint(medium) {
+                        position: absolute;
+                        transform: translate(0, -50%);
+                        top: 50%;
+                    }
+
+                    @include breakpoint(huge) {
+                        cursor: unset;
+                        @media (min-height: 1080px) {
+                            width: calc(100% + 5rem);
+                            transform: translate(-5rem, -50%);
+                        }
+                    }
+
+                    .tilt {
+                        height: rem(220px);
+                        padding: rem($baseGap);
+                        border-radius: rem(25px);
+                        background: $primary;
+                        color: $light;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+
+                        @include breakpoint(medium) {
+                            box-shadow: 7px 100px 77px 0px rgba(147,148,166,0.3);
+                        }
+                    }
+                }
+
+                img {
+                    width: rem(90px);
+                }
+
+                .flex {
+                    display: flex;
+                    width: 100%;
+                    align-items: baseline;
+                    justify-content: space-between;
+
+                    .small {
+                        margin-bottom: rem(2px);
+                        line-height: 1.3;
+                    }
+                }
+            }
+
+            #earnings {
+                overflow: hidden;
+                padding: rem($baseGap) rem($baseGap) rem(10px);
+
+                @include breakpoint(large) {
+                    grid-column: 5 / 11;
+                }
+
+                .headline {
+                    margin-bottom: rem(2px);
+                }
+
+                .apexcharts {
+                    pointer-events: none;
+                }
+            }
+
+            #lastReaches {
+                overflow: hidden;
+                padding: rem($baseGap) rem($baseGap) rem(10px);
+
+                @include breakpoint(large) {
+                    grid-column: 1 / 7;
+                }
+
+                .headline {
+                    margin-bottom: rem(2px);
+                }
+
+                .apexcharts {
+                    pointer-events: none;
+                }
+            }
+
+            #efficiency {
+                overflow: hidden;
+                padding: rem($baseGap) rem($baseGap) rem(10px);
+
+                @include breakpoint(large) {
+                    grid-column: 7 / 11;
+                }
+
+                .headline {
+                    font-weight: 600;
+                    margin-bottom: rem(20px);
+                }
+
+                .apexcharts {
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+    .content {
+        .box {
+            @extend .marginBottom;
+            background: $light;
+            border-radius: 1.5625rem;
+            padding: rem($baseGap);
+
+            &.special {
+                background: $primary;
+                color: $light;
+
+                .btn {
+                    background: $secondary;
+
+                    &:hover, &:focus, &:active {
+                        background:#6b85b3;
+                    }
+                }
+            }
+
+            .small {
+                color: $dark;
+            }
+
+            .headline {
+                font-weight: 600;
+                margin-bottom: 1rem;
+                display: block;
+
+                &.h2 {
+                    @extend .marginBottom;
+                }
+            }
+
+            .row {
+                gap: 0 rem($baseGap);
+                margin-left: 0;
+                margin-right: 0;
+
+
+                .col-12 {
+                    padding-left: 0;
+                    padding-right: 0;
+
+                    &.col-lg-6 {
+                        @include breakpoint(large) {
+                            flex: 0 0 calc(50% - 15px);
+                            max-width: calc(50% - 15px);
+                        }
+
+                    }
+                }
+            }
+            
+            .flex {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: rem(10px);
+
+                button, .btn {
+                    margin-bottom: 0;
+
+                    @include breakpoint(small) {
+                        width: max-content;
+                    }
+                }
+            }
+        }
+    }
+}

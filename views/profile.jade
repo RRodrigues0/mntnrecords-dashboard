@@ -1,0 +1,78 @@
+doctype html
+html.light-style(lang="en")
+    head
+        include includes/_head
+    body(class="profile")
+        div(class="grid container")
+            div(class="row")
+                div(class="col-12")
+                    div(class="page")
+                        aside(class="left")
+                            div(class="logo")
+                                a(href="/")
+                                    img(src="/public/images/branding.svg")
+                            div(class="navigation")
+                                nav
+                                    ul
+                                        li(class="overview")
+                                            a(href="/")
+                                                i(class="fa fa-house")
+                                                span Overview
+                                        li(class="profile")
+                                            a(class="active" href="/profile")
+                                                i(class="fa fa-user")
+                                                span Profile
+                                        li(class="documents")
+                                            a(href="/documents")
+                                                i(class="fa fa-file-invoice")
+                                                span Documents
+                                        li(class="payout")
+                                            a(href="/payout")
+                                                i(class="fa fa-money-check")
+                                                span Payout
+                            div(class="report")
+                                img(src="/public/images/report.png")
+                                p(class="h4 headline") PDF Report
+                                    span(class="small") Detailed monthly report
+                                a(class="btn" href="/documents#newest") Download
+                        main
+                            div(class="padding")
+                                div(class="iconBar")
+                                    ul
+                                    ul
+                                        li
+                                            button(class="currency")
+                                                i(class="fa fa-euro-sign")
+                                        li
+                                            button(class="notifications")
+                                                i(class="fa fa-bell")
+                                        li
+                                            a(class="logout" href="/logout")
+                                                i(class="fa fa-right-from-bracket")
+
+                                div(class="content")
+                                    h1 Profile
+                                    div(class="row")
+                                        div(class="col-12")
+                                            form(id="passForm" method='POST' action='/profile')
+                                                div(class="box")
+                                                    p(class="headline") Change your password
+                                                    div(class="row")
+                                                        div(class="col-12 col-lg-6")
+                                                            label(for='newPassword') New password
+                                                            input#newPassword(type='password' name='newPassword' placeholder='············')
+                                                        div(class="col-12 col-lg-6")
+                                                            label(for='confirmPassword') Confirm new password
+                                                                input#confirmPassword(type='password' name='confirmPassword' placeholder='············')
+                                                        div(class="col-12")
+                                                            div(class="flex")
+                                                                input(type="submit" class="btn" value="Save new password")
+                                                                input(type='button' class="btn secondary" value='Cancel' onclick='document.querySelector("#passForm").reset();')
+                                                            div(class="output")
+                                                                if error_passwd
+                                                                    div(class="border-error")= error_passwd
+                                                                if success_passwd
+                                                                    div(class="border-success")= success_passwd
+        include includes/_scripts
+        script(async='', src='https://www.googletagmanager.com/gtag/js?id=G-9P4DS23DR6')
+        script(src='/public/js/analytics.js')

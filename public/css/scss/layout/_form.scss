@@ -1,0 +1,220 @@
+@keyframes error {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+form {
+    width: 100%;
+
+    &.disabled {
+        input, textarea, select, button, label {
+            pointer-events: none;
+            opacity:0.5;
+
+            a {
+                pointer-events: all;
+            }
+        }
+    }
+
+    fieldset {
+        border: none;
+
+        @include breakpoint(large) {
+            margin: 0 0 1rem 0;
+        }
+
+    }
+
+    legend, span.legend {
+        @extend .h2;
+    }
+
+    label {
+        @extend .small;
+        margin-top: 0;
+        color: $dark;
+        display: block;
+        padding: 0 0 0.2rem;
+        position: relative;
+        clear:both;
+
+        small {
+            color: $primary;
+            display: inline-block;
+            line-height: 0.5rem;
+        }
+
+        &[for*="privacy-policy"],  &[for*="datenschutz"], &[for*="remember"]{
+            float: right;
+            width: calc(100% - #{rem(30px)});
+        }
+    }
+
+    small {
+        line-height: 1rem;
+        display: inline-block;
+        font-size:0;
+        &:before{
+            font-size:1rem;
+            padding-left:rem(6px);
+        }
+        body.lang-en &{
+            &:before{
+                content:'(Required)';
+            }
+        }
+        body.lang-de &{
+            &:before{
+                content:'(Pflichtfeld)';
+            }
+        }
+    }
+
+    &.cms-map {
+        small {
+            font-size: rem(12px);
+
+            &:before {
+                display: none;
+            }
+        }
+    }
+
+    [type="text"],
+    [type="tel"],
+    [type="email"],
+    [type="file"],
+    input,
+    textarea,
+    select {
+        transition: $transition;
+        background: $light;
+        border: $baseBorder;
+        color: $dark;
+        display: block;
+        font-family: $mainFont;
+        font-size: 1rem;
+        line-height: 1;
+        margin-bottom: 1rem;
+        padding: .85rem $baseGap;
+        position: relative;
+        resize: none;
+        width: 100%;
+        border-radius: 0;
+        border-radius: rem(25px);
+        -webkit-appearance: none;
+
+        &:focus {
+            background: $light;
+            outline: none;
+        }
+
+        @include breakpoint(large) {
+            padding: 1rem 2.0rem;
+            max-height: initial;
+        }
+    }
+
+    textarea {
+        min-height: 7.5rem;
+        padding-top: 0.9rem;
+
+        $inputgroup-count: 3;
+
+        &[name="Message"] {
+            min-height: rem(200px);
+        }
+        &[name="Text"] {
+            min-height: 7.5rem * $inputgroup-count - 4rem;
+        }
+    }
+
+    [type="checkbox"] {
+        display: inline-block;
+        margin: 0 rem(12px) 0 0;
+        padding: 0;
+        width: rem(15px);
+        height: rem(15px);
+        top: 1.5px;
+        flex-shrink: 0;
+        -webkit-appearance: auto;
+
+        body.iexplore & {
+            border: none;
+
+            &:focus {
+                background: none;
+            }
+        }
+    }
+
+    [type="radio"] {
+        margin: 0 rem(15px) 0 0;
+        width: rem(15px);
+        min-height: auto;
+        flex-shrink: 0;
+    }
+
+    button,
+    [type="submit"],[type="button"] {
+        @extend .btn;
+        margin-bottom: 0;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .flex {
+        input:not(:first-child) {
+            @include breakpoint(small, max) {
+                margin-top: 0;
+            }
+        }
+    }
+
+    .h2.headline {
+        margin-bottom: 0.4rem !important;
+    }
+
+    .error {
+        position: relative;
+
+        &:before {
+            content: "\f06a";
+            font-family: $iconFont;
+            font-weight: bold;
+            color: #ff5b5c;
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            font-size: rem(18px);
+            transform: translateY(-50%);
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0;
+            animation: error .5s 0.05s forwards;
+        }
+    }
+
+    .border-error {
+        @extend .small;
+        margin-top: 1rem;
+        color: #ff3350;
+        padding: rem(18px) rem($baseGap);
+        background: rgba(255, 51, 80, 0.065);
+        border-radius: rem(12px);
+    }
+
+    .border-success {
+        @extend .small;
+        margin-top: 1rem;
+        color: #40dd6a;
+        padding: rem(18px) rem($baseGap);
+        background: rgba(64, 221, 106, 0.065);
+        border-radius: rem(12px);
+    }
+}
